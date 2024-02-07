@@ -1,71 +1,56 @@
-/****Constructor
- *
- *
- *
- *
- *
- */
-function HouseKeeper(yearOfExperience, name, cleaningRepertoire = []) {
-  this.yearOfExperience = yearOfExperience;
-  this.name = name;
-  this.cleaningRepertoire = cleaningRepertoire;
+for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
+  document
+    .querySelectorAll(".drum")
+    [i].addEventListener("click", function (eve) {
+      makeSound(this.textContent);
+      buttonAnimation(this.textContent);
+    });
 }
-var houseKeeper1 = new HouseKeeper(12, "Jane", [
-  "bathroom",
-  "lobby",
-  "bedroom",
-]);
-console.log(houseKeeper1);
-// document.querySelector("h1").classList.add("huge");
-// document.querySelector("h1").textContent = "Tom";
-function add(a, b) {
-  return a + b;
-}
-function multiply(a, b) {
-  return a * b;
-}
+document.body.addEventListener("keydown", (eve) => {
+  eve.preventDefault();
+  makeSound(eve.key);
+  buttonAnimation(eve.key);
+});
 
-function calculator(a, b, operator) {
-  return operator(a, b);
+function buttonAnimation(key) {
+  var activeButton = document.querySelector("." + key);
+  activeButton.classList.add("pressed");
+
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
-// function fibbo(n, arr = [0, 1]) {
-//   if (n <= 1) return [0];
-//   if (n == 2) return [0, 1];
-//   else {
-//     if (n > arr.length) {
-//       arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
-//       return fibbo(n, arr);
-//     } else {
-//       return arr;
-//     }
-//   }
-// }
-// console.log(fibbo(10));
-// une function recursive qui ajoute a chaque n eme  chiffre d'une array un nombre x
-// la longueeur sera y
-
-// n position recursive
-// x nombre a ajouter
-// nombre d'elements
-
-// function addRecursive(x = 0, n = 1, y = 0, arr = [0]) {
-//   if (y <= 1) {
-//     return arr;
-//   } else {
-//     if (arr.length < y) {
-//       let backup = arr[arr.length - 1];
-//       if (arr.length == n) {
-//         arr.push(backup + x);
-//       }
-//       if (arr.length > n && arr.length % n === 0) {
-//         arr.push(backup + x);
-//       }
-//       arr.push(backup + 1);
-//       return addRecursive(x, n, y, arr);
-//     } else {
-//       // arr.splice(arr[arr.findIndex((e) => e == 0)]);
-//       return arr;
-//     }
-//   }
-// }
-// console.log(addRecursive(-2, 2, 10));
+function makeSound(key) {
+  var kick = new Audio("./sounds/kick-bass.mp3");
+  var snare = new Audio("./sounds/snare.mp3");
+  var crash = new Audio("./sounds/crash.mp3");
+  var tom1 = new Audio("./sounds/tom-1.mp3");
+  var tom2 = new Audio("./sounds/tom-2.mp3");
+  var tom3 = new Audio("./sounds/tom-3.mp3");
+  var tom4 = new Audio("./sounds/tom-4.mp3");
+  switch (key) {
+    case "w":
+      kick.play();
+      break;
+    case "a":
+      snare.play();
+      break;
+    case "s":
+      crash.play();
+      break;
+    case "d":
+      tom1.play();
+      break;
+    case "j":
+      tom2.play();
+      break;
+    case "k":
+      tom3.play();
+      break;
+    case "l":
+      tom4.play();
+      break;
+    default:
+      console.log(eve.target.textContent);
+  }
+}
